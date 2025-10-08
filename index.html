@@ -159,6 +159,105 @@
             margin-top: 1rem;
         }
 
+        .terms-link {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .terms-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-link a:hover {
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #000;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .terms-content h2 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-content h3 {
+            font-size: 1.25rem;
+            color: #2c2c2c;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .terms-content p {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .terms-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .terms-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
         @media (max-width: 640px) {
             h1 {
                 font-size: 2rem;
@@ -174,6 +273,14 @@
 
             .container {
                 padding: 2rem 1.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal {
+                padding: 1rem;
             }
         }
     </style>
@@ -215,18 +322,77 @@
                     ✓ You're on the list! Check your email for exclusive early access.
                 </div>
             </div>
+
+            <div class="terms-link">
+                <a href="#" id="termsLink">Terms and Conditions</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="terms-content">
+                <h2>Terms and Conditions – Contact Capture Campaign</h2>
+
+                <h3>1. Introduction</h3>
+                <p>By submitting your contact details through this form, you agree to these Terms and Conditions ("Terms"). These Terms govern the collection, use, and storage of your personal information provided via our TikTok campaigns or any related promotional activities.</p>
+
+                <h3>2. Data Collection and Purpose</h3>
+                <p>We collect personal information such as your name, email address, phone number, and any other details you provide. This information is collected solely for the purposes of:</p>
+                <ul>
+                    <li>Contacting you regarding our products, services, or promotions.</li>
+                    <li>Providing updates, offers, or information you've expressed interest in.</li>
+                    <li>Improving our marketing and customer engagement efforts.</li>
+                </ul>
+
+                <h3>3. Consent</h3>
+                <p>By submitting your information, you:</p>
+                <ul>
+                    <li>Consent to us collecting, storing, and using your personal data in accordance with these Terms and our Privacy Policy.</li>
+                    <li>Agree to receive marketing communications via email, SMS, or social media from our business.</li>
+                </ul>
+                <p>You may withdraw your consent at any time by contacting us or using the unsubscribe link in our messages.</p>
+
+                <h3>4. Data Protection</h3>
+                <p>We are committed to protecting your privacy. All personal information collected will be stored securely and will not be sold, shared, or disclosed to third parties except:</p>
+                <ul>
+                    <li>Where required by law.</li>
+                    <li>To trusted service providers assisting in our marketing or communication efforts, under strict confidentiality agreements.</li>
+                </ul>
+
+                <h3>5. Accuracy of Information</h3>
+                <p>You are responsible for ensuring that all information provided is accurate and up to date. We are not liable for any issues arising from incorrect or incomplete information provided by you.</p>
+
+                <h3>6. Opt-Out and Data Removal</h3>
+                <p>You may request access, correction, or deletion of your personal data at any time by contacting us at [insert contact email or website form]. You can also opt out of receiving marketing messages at any time by following the unsubscribe instructions in our communications.</p>
+
+                <h3>7. Disclaimer</h3>
+                <p>Participation in this campaign does not guarantee any reward, product, or offer unless explicitly stated. We reserve the right to modify or terminate this campaign at any time without prior notice.</p>
+
+                <h3>8. Changes to These Terms</h3>
+                <p>We may update these Terms from time to time. The latest version will always be available at [insert website or link]. Continued participation in the campaign after changes constitutes your acceptance of the revised Terms.</p>
+
+                <h3>9. Contact Information</h3>
+                <p>If you have any questions about these Terms or our data practices, please contact us at:</p>
+                <p>📧 [Insert business email address]<br>
+                📍 [Insert business address]</p>
+            </div>
         </div>
     </div>
 
     <script>
         const form = document.getElementById('emailForm');
         const successMessage = document.getElementById('successMessage');
+        const termsModal = document.getElementById('termsModal');
+        const termsLink = document.getElementById('termsLink');
+        const closeModal = document.getElementById('closeModal');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const formData = new FormData(form);
-            
+
             try {
                 const response = await fetch(form.action, {
                     method: 'POST',
@@ -242,6 +408,22 @@
                 }
             } catch (error) {
                 alert('Something went wrong. Please try again.');
+            }
+        });
+
+        // Terms modal functionality
+        termsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            termsModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            termsModal.classList.remove('active');
+        });
+
+        termsModal.addEventListener('click', (e) => {
+            if (e.target === termsModal) {
+                termsModal.classList.remove('active');
             }
         });
     </script>
